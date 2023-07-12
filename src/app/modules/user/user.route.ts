@@ -1,5 +1,10 @@
 import express from "express";
-import { createUser, getUserById, getUsers } from "./user.controller";
+import {
+  createUser,
+  getAdminUsers,
+  getUserById,
+  getUsers,
+} from "./user.controller";
 
 const router = express.Router();
 
@@ -10,6 +15,9 @@ router.post("/create-user", createUser);
 
 // get all users from DB
 router.get("/", getUsers);
+
+// get admin users => called on top of dynamic route ":id", if not, /admins will be called as a dynamic id //
+router.get("/admins", getAdminUsers);
 
 // get specific user by id param
 router.get("/:id", getUserById);
