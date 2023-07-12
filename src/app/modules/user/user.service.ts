@@ -12,3 +12,17 @@ export const getUsersFromDB = async (): Promise<IUser[]> => {
   const users = await User.find();
   return users;
 };
+
+// get a specific user by id //
+export const getUsersByIdFromDB = async (
+  payload: string
+): Promise<IUser | null> => {
+  // const user = await User.findOne({ id: payload }); // id itself is the payload
+
+  // *** field filtering //
+  const user = await User.findOne(
+    { id: payload },
+    { name: 1, email: 1, contactNo: 1 }
+  );
+  return user;
+};
